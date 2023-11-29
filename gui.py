@@ -19,12 +19,10 @@ class Ui_MainWindow(object):
         self.label_2.setGeometry(QtCore.QRect(270, 80, 191, 61))
         self.label_2.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         self.label_2.setObjectName("label_2")
-
         self.widget_main = QtWidgets.QWidget(parent=self.centralwidget)
         self.widget_main.setEnabled(True)
         self.widget_main.setGeometry(QtCore.QRect(270, 160, 181, 301))
         self.widget_main.setObjectName("widget_main")
-
         self.BreakTimeEntry_2 = QtWidgets.QLineEdit(parent=self.widget_main)
         self.BreakTimeEntry_2.setGeometry(QtCore.QRect(20, 150, 141, 20))
         self.BreakTimeEntry_2.setObjectName("BreakTimeEntry_2")
@@ -54,12 +52,10 @@ class Ui_MainWindow(object):
         self.ReenterButton_2 = QtWidgets.QPushButton(parent=self.widget_main)
         self.ReenterButton_2.setGeometry(QtCore.QRect(130, 200, 31, 31))
         self.ReenterButton_2.setObjectName("ReenterButton_2")
-
         self.widget_second = QtWidgets.QWidget(parent=self.centralwidget)
-        self.widget_second.setEnabled(False)
-        self.widget_second.setGeometry(QtCore.QRect(270, 150, 381, 311))
+        self.widget_second.setEnabled(True)
+        self.widget_second.setGeometry(QtCore.QRect(470, 150, 381, 311))
         self.widget_second.setObjectName("widget_second")
-
         self.SignUpButton_1 = QtWidgets.QPushButton(parent=self.widget_second)
         self.SignUpButton_1.setGeometry(QtCore.QRect(90, 210, 71, 31))
         self.SignUpButton_1.setObjectName("SignUpButton_1")
@@ -67,7 +63,7 @@ class Ui_MainWindow(object):
         self.UsernameEntry_1.setGeometry(QtCore.QRect(20, 60, 141, 20))
         self.UsernameEntry_1.setObjectName("UsernameEntry_1")
         self.label_1 = QtWidgets.QLabel(parent=self.widget_second)
-        self.label_1.setEnabled(False)
+        self.label_1.setEnabled(True)
         self.label_1.setGeometry(QtCore.QRect(20, 30, 111, 31))
         self.label_1.setObjectName("label_1")
         self.PasswordEntry_1 = QtWidgets.QLineEdit(parent=self.widget_second)
