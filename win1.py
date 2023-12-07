@@ -73,8 +73,8 @@ class Win1:
         self.Label_output["font"] = self.ft
         self.Label_output["fg"] = "#333333"
         self.Label_output["justify"] = "center"
-        self.outputvar = tk.StringVar(root,"")
-        self.Label_output["textvariable"] = self.outputvar
+        self.outputvar1 = tk.StringVar(root,"")
+        self.Label_output["textvariable"] = self.outputvar1
         self.Label_output.pack()
 
 if __name__ == "__main__":

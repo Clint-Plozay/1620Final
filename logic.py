@@ -43,17 +43,23 @@ class Logic(Win1,Win2):
             self.outputvar.set("Time recorded!")
 
     def overwrite(self,index):
-        with open(f"Employee/{self.loggedUser}",'w+') as employeeFile:
-            csvWriter = csv.writer(employeeFile, delimiter=",")
-            csvReader = csv.reader(employeeFile, delimiter=",")
-            start = self.startedvar.get()
-            end = self.endedvar.get()
-            filelist = [i for i in csvReader]
-            print(filelist)
-            filelist[index][1] = f"{start}-{end}"
-            print(filelist)
-            #csvWriter.writerows(filelist)
-            self.clear()
+        start = self.startedvar.get()
+        end = self.endedvar.get()
+
+        employeeFile = open(f"Employee/{self.loggedUser}",'r')
+        csvReader = csv.reader(employeeFile, delimiter=",")
+        filelist = [i for i in csvReader]
+        print(filelist)
+        employeeFile.close()
+
+        employeeFile = open(f"Employee/{self.loggedUser}", 'w',newline="")
+        csvWriter = csv.writer(employeeFile, delimiter=",")
+        filelist[index][1] = f"{start}-{end}"
+        print(filelist)
+        csvWriter.writerows(filelist)
+        employeeFile.close()
+        self.outputvar.set("Time recorded!")
+        self.clear()
 
 
 
@@ -68,7 +74,6 @@ class Logic(Win1,Win2):
         user = self.usernamevar.get()
         passw = self.passwordvar.get()
         try:
-
             employeeFile = open(f"Employee/{user}",'r')
             user = employeeFile.readline()[9:].strip()
             print(user)
@@ -85,7 +90,7 @@ class Logic(Win1,Win2):
                 employeeFile.close()
                 raise FileNotFoundError
         except FileNotFoundError:
-            self.outputvar.set("Username or Password incorrect")
+            self.outputvar1.set("Username or Password incorrect")
 
     def logout(self):
         self.hide2()
@@ -97,12 +102,12 @@ class Logic(Win1,Win2):
         #regex: (?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[!?])[a-zA-Z0-9!?]{2,}
         if user not in directory:
             # TODO: add actual password validation
-            if len(passw) > 5:
+            if len(passw) >= 4:
                 employeeFile = open(f"Employee/{user}","w")
-                employeeFile.writelines([f"Username={user}\n",f"Password={passw}\n"])
+                employeeFile.writelines([f"Username,{user}\n",f"Password,{passw}\n"])
                 employeeFile.close()
-                self.outputvar.set("User successfully created!")
+                self.outputvar1.set("User successfully created!")
             else:
-                self.outputvar.set("password must be longer than 5 characters")
+                self.outputvar1.set("password must be longer than 5 characters")
         else:
-            self.outputvar.set("User name already being used")
+            self.outputvar1.set("User name already being used")
