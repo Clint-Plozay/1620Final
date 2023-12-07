@@ -1,22 +1,9 @@
-from person import *
-import os
-from logic import *
+from tkinter import *
+import logic
 
-def main():
-    application = QApplication([])
-    window = Logic()
-    window.show()
-    application.exec()
 
-if __name__ == '__main__':
-    main()
+main = Tk()
+main.geometry("400x542")
+logic = logic.Logic(main)
 
-directoryPath = r"Employee"
-objectList = []
-directory = os.listdir(directoryPath)
-
-for filename in directory:
-    objectList.append(Person(open(f"Employee/{filename}", 'r')))
-
-for employee in objectList:
-    print(employee)
+main.mainloop()
