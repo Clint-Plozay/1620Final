@@ -3,6 +3,7 @@ from win2 import Win2
 from tkinter import *
 import csv
 import os
+import re
 class Logic(Win1,Win2):
     def __init__(self,root):
         self.widget1 = Frame(root)
@@ -21,31 +22,87 @@ class Logic(Win1,Win2):
         self.widget2.pack()
 
     def submit(self):
-        pass
+        with open(f"Employee/{self.loggedUser}", "r+",newline = "") as employeeFile:
+            #TODO: validate that shacleika
+            csvWriter = csv.writer(employeeFile,delimiter=",")
+            csvReader = csv.reader(employeeFile,delimiter=",")
+            date = self.datevar.get() # in file entry[:8]
+            start = self.startedvar.get()
+            end = self.endedvar.get()
+            dateslist = [i[0] for i in csvReader]
+            print(dateslist)
+            for item in dateslist:
+                if item == date:
+                    index = dateslist.index(item)
+                    self.GButton_submit["command"] = lambda: self.overwrite(index)
+                    self.outputvar.set(f"An entry for {date} already exists!\nClick 'Submit' again to overwrite, otherwise click 'clear'")
+                    employeeFile.close()
+                    return None
+
+            csvWriter.writerow([date, f"{start}-{end}"])
+            self.outputvar.set("Time recorded!")
+
+    def overwrite(self,index):
+        with open(f"Employee/{self.loggedUser}",'w+') as employeeFile:
+            csvWriter = csv.writer(employeeFile, delimiter=",")
+            csvReader = csv.reader(employeeFile, delimiter=",")
+            start = self.startedvar.get()
+            end = self.endedvar.get()
+            filelist = [i for i in csvReader]
+            print(filelist)
+            filelist[index][1] = f"{start}-{end}"
+            print(filelist)
+            #csvWriter.writerows(filelist)
+            self.clear()
+
+
 
     def clear(self):
-        pass
+        self.datevar.set("")
+        self.startedvar.set("")
+        self.endedvar.set("")
+        self.outputvar.set("")
+        self.GButton_submit["command"] = self.submit
 
     def login(self):
         user = self.usernamevar.get()
         passw = self.passwordvar.get()
         try:
-            employeeFile = open(f"Employee/{user}.py",'r')
-            employeeFile.readline()
-            filePass = employeeFile.readline()
-            print(filePass," pass in file")
-            print(passw," pass we entered")
+
+            employeeFile = open(f"Employee/{user}",'r')
+            user = employeeFile.readline()[9:].strip()
+            print(user)
+            filePass = employeeFile.readline()[9:].strip()
+            print(filePass)
             if filePass == passw:
-                self.loggedUser = employeeFile
-                print("match")
+                self.loggedUser = user
+                self.usernamevar.set("")
+                self.passwordvar.set("")
+                self.outputvar.set("")
+                self.hide1()
+                employeeFile.close()
             else:
                 employeeFile.close()
                 raise FileNotFoundError
         except FileNotFoundError:
-            print("Username or Password incorrect")
+            self.outputvar.set("Username or Password incorrect")
 
     def logout(self):
-        pass
+        self.hide2()
 
     def signup(self):
-        pass
+        user = self.usernamevar.get()
+        passw = self.passwordvar.get()
+        directory = os.listdir("Employee")
+        #regex: (?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[!?])[a-zA-Z0-9!?]{2,}
+        if user not in directory:
+            # TODO: add actual password validation
+            if len(passw) > 5:
+                employeeFile = open(f"Employee/{user}","w")
+                employeeFile.writelines([f"Username={user}\n",f"Password={passw}\n"])
+                employeeFile.close()
+                self.outputvar.set("User successfully created!")
+            else:
+                self.outputvar.set("password must be longer than 5 characters")
+        else:
+            self.outputvar.set("User name already being used")

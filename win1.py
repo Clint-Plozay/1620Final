@@ -68,6 +68,15 @@ class Win1:
         self.GButton_266.pack()
         self.GButton_266["command"] = self.signup
 
+        self.Label_output = tk.Label(root)
+        self.ft = tkFont.Font(family='Times', size=10)
+        self.Label_output["font"] = self.ft
+        self.Label_output["fg"] = "#333333"
+        self.Label_output["justify"] = "center"
+        self.outputvar = tk.StringVar(root,"")
+        self.Label_output["textvariable"] = self.outputvar
+        self.Label_output.pack()
+
 if __name__ == "__main__":
     root = tk.Tk()
     #app = App(root)

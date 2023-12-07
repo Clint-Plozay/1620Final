@@ -94,7 +94,16 @@ class Win2:
         self.GButton_logout["justify"] = "center"
         self.GButton_logout["text"] = "Logout"
         self.GButton_logout.pack()
-        self.GButton_logout["command"] = self.hide2
+        self.GButton_logout["command"] = self.logout
+
+        self.Label_output = tk.Label(root)
+        self.ft = tkFont.Font(family='Times', size=10)
+        self.Label_output["font"] = self.ft
+        self.Label_output["fg"] = "#333333"
+        self.Label_output["justify"] = "center"
+        self.outputvar = tk.StringVar(root, "")
+        self.Label_output["textvariable"] = self.outputvar
+        self.Label_output.pack()
 
     def GButton_266_command(self):
         print("command")
