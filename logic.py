@@ -95,6 +95,8 @@ class Logic(Win1,Win2):
                 raise FileNotFoundError
         except FileNotFoundError:
             self.outputvar1.set("Username or Password incorrect")
+        except:
+            self.outputvar1.set("Username or Password incorrect")
 
     def logout(self):
         self.hide2()
