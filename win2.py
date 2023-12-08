@@ -35,7 +35,7 @@ class Win2:
         self.GLabel_138["font"] = self.ft
         self.GLabel_138["fg"] = "#333333"
         self.GLabel_138["justify"] = "center"
-        self.GLabel_138["text"] = "Started"
+        self.GLabel_138["text"] = "Started (24:00)"
         self.GLabel_138.pack()
 
         self.GLineEdit_85=tk.Entry(root)
@@ -53,7 +53,7 @@ class Win2:
         self.GLabel_1382["font"] = self.ft
         self.GLabel_1382["fg"] = "#333333"
         self.GLabel_1382["justify"] = "center"
-        self.GLabel_1382["text"] = "Ended"
+        self.GLabel_1382["text"] = "Ended (24:00)"
         self.GLabel_1382.pack()
 
         self.GLineEdit_852=tk.Entry(root)

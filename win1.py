@@ -58,15 +58,15 @@ class Win1:
         self.GButton_131.pack()
         self.GButton_131["command"] = self.login
 
-        self.GButton_266=tk.Button(root)
-        self.GButton_266["bg"] = "#f0f0f0"
+        self.GButton_signup=tk.Button(root)
+        self.GButton_signup["bg"] = "#f0f0f0"
         self.ft = tkFont.Font(family='Times',size=10)
-        self.GButton_266["font"] = self.ft
-        self.GButton_266["fg"] = "#000000"
-        self.GButton_266["justify"] = "center"
-        self.GButton_266["text"] = "Sign Up"
-        self.GButton_266.pack()
-        self.GButton_266["command"] = self.signup
+        self.GButton_signup["font"] = self.ft
+        self.GButton_signup["fg"] = "#000000"
+        self.GButton_signup["justify"] = "center"
+        self.GButton_signup["text"] = "Sign Up"
+        self.GButton_signup.pack()
+        self.GButton_signup["command"] = self.signup
 
         self.Label_output = tk.Label(root)
         self.ft = tkFont.Font(family='Times', size=10)
