@@ -2,8 +2,11 @@ import tkinter as tk
 import tkinter.font as tkFont
 
 class Win1:
-    def __init__(self, root):
-
+    def __init__(self, root) -> None:
+        '''
+        This function initialises all the gui objects and packs them onto "root"
+        :param root: This should be the Tkinter widget that will get the elements in Win1 packed onto it
+        '''
         self.GLabel_706=tk.Label(root)
         self.ft = tkFont.Font(family='Times',size=38)
         self.GLabel_706["font"] = self.ft

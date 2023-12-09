@@ -5,7 +5,11 @@ import csv
 import os
 import re
 class Logic(Win1,Win2):
-    def __init__(self,root):
+    def __init__(self,root: object) -> None:
+        """
+        __init__ takes in the main tkinter window and calls the __init__ methods of Win1 and Win2
+        :param root: main Tkinter window
+        """
         self.widget1 = Frame(root)
         self.widget2 = Frame(root)
         Win1.__init__(self,self.widget1)
@@ -13,15 +17,24 @@ class Logic(Win1,Win2):
         self.widget1.pack()
         self.loggedUser = None
 
-    def hide2(self):
+    def hide2(self) -> None:
+        """
+        This function unpacks widget2 and packs widget1 in order to switch screens.
+        """
         self.widget2.pack_forget()
         self.widget1.pack()
 
-    def hide1(self):
+    def hide1(self) -> None:
+        """
+        This function unpacks widget1 and packs widget2 in order to switch screens.
+        """
         self.widget1.pack_forget()
         self.widget2.pack()
 
-    def submit(self):
+    def submit(self) -> None:
+        """
+        This function contains the logic for getting the user's input and adding it to the logged-in user's file
+        """
         with open(f"Employee/{self.loggedUser}", "r+",newline = "") as employeeFile:
             csvWriter = csv.writer(employeeFile,delimiter=",")
             csvReader = csv.reader(employeeFile,delimiter=",")
@@ -43,7 +56,11 @@ class Logic(Win1,Win2):
                 self.outputvar.set("Time recorded!")
             else:
                 self.outputvar.set("Date should be in mm/dd/yy format, and time should be in 24:00 time")
-    def overwrite(self,index):
+    def overwrite(self,index: int) -> None:
+        """
+        This function contains the logic for overwriting a line in a user file as indicated by the integer passed to "index"
+        :param index: index where line should be overwritten, should be an integer
+        """
         start = self.startedvar.get()
         end = self.endedvar.get()
         date = self.datevar.get()
@@ -67,14 +84,20 @@ class Logic(Win1,Win2):
             self.GButton_submit["command"] = self.submit
 
 
-    def clear(self):
+    def clear(self) -> None:
+        """
+        This function clears the input boxes and message labels on widget2
+        """
         self.datevar.set("")
         self.startedvar.set("")
         self.endedvar.set("")
         self.outputvar.set("")
         self.GButton_submit["command"] = self.submit
 
-    def login(self):
+    def login(self) -> None:
+        """
+        This function contains the logic for matching the entered username and password with an existing user file.
+        """
         user = self.usernamevar.get()
         passw = self.passwordvar.get()
         try:
@@ -98,12 +121,19 @@ class Logic(Win1,Win2):
         except:
             self.outputvar1.set("Username or Password incorrect")
 
-    def logout(self):
+    def logout(self) -> None:
+        '''
+        This function contains the logic for logging out of a user account and going back to the login screen.
+        '''
         self.hide2()
         self.clear()
 
-    def validPassword(self,passw):
-
+    def validPassword(self,passw: str) -> None:
+        '''
+        This function contains the logic for validating the password that is sent to it.
+        :param passw: This is the password that will be validated.
+        :return: Returns True if the password has at least one uppercase and lowercase letter, as well as one number and one special character.
+        '''
         hasLower = False
         hasUpper = False
         hasSpecial = False
@@ -121,7 +151,10 @@ class Logic(Win1,Win2):
 
         return hasLower and hasUpper and hasSpecial and hasNum
 
-    def signup(self):
+    def signup(self) -> None:
+        '''
+        This function contains the logic for creating a new user file.
+        '''
         user = self.usernamevar.get()
         passw = self.passwordvar.get()
         directory = os.listdir("Employee")
